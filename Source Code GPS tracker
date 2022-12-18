@@ -145,7 +145,6 @@ void send_sms()
 {
   Serial.write(26);
 }
-
 void lcd_status()
 {
   lcd.clear();
@@ -154,4 +153,26 @@ void lcd_status()
   lcd.clear();
   lcd.print("System Ready");
   return;
+}
+void tracking()
+{
+    init_sms();
+    send_data("Vehicle Tracking Alert:");
+    Serial.println(" "); 
+    send_data("Your Vehicle Current Location is:");
+    Serial.println(" "); 
+    Serial.print("Latitude: ");
+    Serial.print(gps.location.lat(), 6);
+    Serial.print("\n Longitude: ");
+    Serial.println(gps.location.lng(), 6);
+
+   // https://www.google.com/maps/@8.2630696,77.3022699,14z
+   Serial.print("https://www.google.com/maps/@");
+   Serial.print(gps.location.lat(), 6);
+   Serial.print(',');
+   Serial.print(gps.location.lng(), 6);
+   Serial.print(",14z");
+    send_sms();
+    delay(2000);
+    lcd_status();
 }
