@@ -145,3 +145,13 @@ void send_sms()
 {
   Serial.write(26);
 }
+
+void lcd_status()
+{
+  lcd.clear();
+  lcd.print("Message Sent");
+  delay(2000);
+  lcd.clear();
+  lcd.print("System Ready");
+  return;
+}
